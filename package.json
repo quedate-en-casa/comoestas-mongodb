@@ -14,9 +14,10 @@
     "cross-env": "^7.0.2",
     "gulp": "^4.0.2",
     "jest": "^26.1.0",
-    "standard": "^14.3.4"
+    "standard": "^14.3.4",
+    "testcontainers": "^2.14.0"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest --detectOpenHandles"
   }
 }

@@ -1,0 +1,16 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"javascript.validate.enable": false,
+		"typescript.format.enable": false,
+		"standard.enable": true,
+		"standard.autoFixOnSave": true,
+		"standard.validate": [
+			"javascript",
+		],
+	}
+}
