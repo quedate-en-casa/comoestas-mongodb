@@ -1,0 +1,22 @@
+{
+  "name": "comoestas-mongodb",
+  "version": "1.0.0",
+  "description": "MongoDB persistence layer for \"Como Estas\"",
+  "main": "index.js",
+  "repository": "https://github.com/quedate-en-casa/comoestas-mongodb.git",
+  "author": "Patricio Ascencio <paascencio@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "mongoose": "^5.9.20"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "gulp": "^4.0.2",
+    "jest": "^26.1.0",
+    "standard": "^14.3.4"
+  },
+  "scripts": {
+    "test": "jest"
+  }
+}
