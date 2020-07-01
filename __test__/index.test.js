@@ -1,6 +1,8 @@
 /* eslint-env jest */
 
 const { GenericContainer } = require('testcontainers')
+const { DoctorDomain } = require('comoestas-core/src/doctor/doctor.domain')
+const { RecordDomain } = require('comoestas-core/src/record/record.domain')
 
 const TIMEOUT = 1000000
 let db
@@ -25,12 +27,8 @@ afterAll(async (done) => {
 
 describe('Doctor repository test suite', () => {
   test('Insert doctor', async () => {
-    const newDoctor = await db.doctor.insert({
-      fullName: 'John Doe',
-      rut: '1-1',
-      hospital: 'PPTH',
-      phone: '+56912345678'
-    })
+    const doctor = new DoctorDomain('John Doe', '1-1', 'PPTH', '+56912345678')
+    const newDoctor = await db.doctor.insert(doctor)
     expect(newDoctor).not.toBeNull()
     expect(newDoctor).not.toBeUndefined()
     expect(newDoctor.id).not.toBeNull()
@@ -40,35 +38,18 @@ describe('Doctor repository test suite', () => {
 
 describe('Records repository test suite', () => {
   beforeAll(async (done) => {
-    await db.record.insert({
-      hospital: 'PPTH',
-      doctorComments: 'First comment',
-      rut: '1-1',
-      doctor: 'Gregory House',
-      status: 'Good'
-    })
-    await db.record.insert({
-      hospital: 'PPTH',
-      doctorComments: 'Second comment',
-      rut: '1-1',
-      doctor: 'Gregory House',
-      status: 'Good'
-    })
+    await db.record.insert(new RecordDomain('PPTH', 'First comment', '1-1', 'Gregory House', 'Good'))
+    await db.record.insert(new RecordDomain('PPTH', 'Second comment', '1-1', 'Gregory House', 'Good'))
     done()
   })
   test('Insert record', async () => {
-    const record = await db.record.insert({
-      hospital: 'PPTH',
-      doctorComments: 'Some comment',
-      rut: '1-2',
-      doctor: 'James Wilson',
-      status: 'Bad'
-    })
-    expect(record).not.toBeNull()
-    expect(record).not.toBeUndefined()
-    expect(record.id).not.toBeNull()
-    expect(record.id).not.toBeUndefined()
-    expect(record.date).not.toBeUndefined()
+    const record = new RecordDomain('PPTH', 'Some comment', '1-2', 'James Wilson', 'Bad')
+    const newRecord = await db.record.insert(record)
+    expect(newRecord).not.toBeNull()
+    expect(newRecord).not.toBeUndefined()
+    expect(newRecord.id).not.toBeNull()
+    expect(newRecord.id).not.toBeUndefined()
+    expect(newRecord.date).not.toBeUndefined()
   }, TIMEOUT)
 
   test('Get records by rut', async () => {

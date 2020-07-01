@@ -1,9 +1,17 @@
 const { RecordModel } = require('./record.model')
+const { RecordDomain } = require('comoestas-core/src/record/record.domain')
 
 module.exports.RecordRepository = class {
   async insert (record) {
     record.date = Date.now()
-    const model = new RecordModel(record)
+    const model = new RecordModel({
+      hospital: record.hospital,
+      doctorComments: record.doctorComments,
+      rut: record.rut,
+      date: record.date,
+      doctor: record.doctor,
+      status: record.statusg
+    })
     return model.save()
       .then(doc => {
         record.id = doc.id
@@ -23,15 +31,9 @@ module.exports.RecordRepository = class {
       .then(docs => {
         return docs
           .map(doc => {
-            return {
-              id: doc.id,
-              hospital: doc.hospital,
-              doctorComments: doc.doctorComments,
-              rut: doc.rut,
-              date: doc.date,
-              doctor: doc.doctor,
-              status: doc.status
-            }
+            const record = new RecordDomain(doc.hospital, doc.doctorComments, doc.rut, doc.date, doc.doctor, doc.status)
+            record.id = doc.id
+            return record
           })
       })
   }
