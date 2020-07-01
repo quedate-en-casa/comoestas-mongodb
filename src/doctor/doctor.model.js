@@ -8,4 +8,4 @@ const doctorSchema = new mongoose.Schema({
   date: Date
 })
 
-module.exports.DoctorSchema = mongoose.model('doctors', doctorSchema)
+module.exports.DoctorModel = mongoose.model('doctors', doctorSchema)
