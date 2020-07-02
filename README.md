@@ -14,7 +14,7 @@ To develop in this project you need `Docker` (basically is needed for integratio
 
 To use test this project you must link the `comoestas-core` package.
 
-First, clone the core repository.
+First, clone the core repository and link it.
 
 ```shell
 git clone https://github.com/quedate-en-casa/comoestas-core.git
@@ -29,3 +29,11 @@ yarn link comoestas-core
 ```
 
 To check if your local environment work's run `yarn test`.
+
+## TODO
+
+- [ ] Add validations
+- [ ] Add index for rut fields
+- [ ] Refactor integrations test
+- [ ] Add continous integration
+- [ ] Add more documentation
