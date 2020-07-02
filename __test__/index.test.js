@@ -26,20 +26,31 @@ afterAll(async (done) => {
 }, TIMEOUT)
 
 describe('Doctor repository test suite', () => {
+  beforeAll(async (done) => {
+    await db.doctor.insert(new DoctorDomain('John Doe', 'PPTH', '1-1', '+56912345678', Date.now()))
+    done()
+  })
   test('Insert doctor', async () => {
-    const doctor = new DoctorDomain('John Doe', '1-1', 'PPTH', '+56912345678')
+    const doctor = new DoctorDomain('John Doe', '1-2', 'PPTH', '+56912345678', Date.now())
     const newDoctor = await db.doctor.insert(doctor)
     expect(newDoctor).not.toBeNull()
     expect(newDoctor).not.toBeUndefined()
     expect(newDoctor.id).not.toBeNull()
     expect(newDoctor.id).not.toBeUndefined()
   }, TIMEOUT)
+  test('Get doctor by rut', async () => {
+    const doctor = await db.doctor.getByRut('1-1')
+    expect(doctor).not.toBeNull()
+    expect(doctor).not.toBeUndefined()
+    expect(doctor.id).not.toBeNull()
+    expect(doctor.id).not.toBeUndefined()
+  })
 })
 
 describe('Records repository test suite', () => {
   beforeAll(async (done) => {
-    await db.record.insert(new RecordDomain('PPTH', 'First comment', '1-1', 'Gregory House', 'Good'))
-    await db.record.insert(new RecordDomain('PPTH', 'Second comment', '1-1', 'Gregory House', 'Good'))
+    await db.record.insert(new RecordDomain('PPTH', 'First comment', '1-1', 'Gregory House', 'Good', Date.now()))
+    await db.record.insert(new RecordDomain('PPTH', 'Second comment', '1-1', 'Gregory House', 'Good', Date.now()))
     done()
   })
   test('Insert record', async () => {
