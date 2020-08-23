@@ -8,7 +8,7 @@ This module is used for the Como Estas On-Premise version. If you want to implem
 
 ## Requirements
 
-To develop over this project you need `Docker` (basically is needed for integration tests with testcontainers), `Node.js` and `Yarn`.
+To develop over this project you need `Docker` (basically, it is needed for integration tests with testcontainers), `Node.js` and `Yarn`.
 
 ## Getting started
 
